@@ -1,29 +1,48 @@
 /*
 * Opgave beskrivelse:
 ToDo: 1. Opret let med listContainer;
-ToDO: 2. Opbyg LI element -> createElement();
+ToDo: 2. Opbyg LI element -> createElement();
 ToDo: 3. Tilføj class fas og fa-trash-alt til <i> classList
 ToDo: 4. Indsæt <p> og <i> ind i <li> appendChild();
 ToDo: 5. Indsæt <li> ind i listContainer.  appendChild();
-
 */
 
+/*
+!Opgave: 03.11.2021
+ToDo: 1. Opret en Array til at gemme produkter i.
+ToDo: 2. Opret en ny funktion som skal læse Array via en for(){}
+ToDo: 3. Vis indholdet af Array på siden.
+ToDo: 4. Husk at gemme nye produkter når brugeren tilføjer dem.
+*/
+
+/*
+!Opgave: 04.11.2021
+ToDo: 1. Tilføj click event på slet knapperne.
+ToDo: 2. Opret en funktion som skal håndtere sletning af <li>
+ToDo: 3. Find product index ved at bruge indexOf().
+ToDo: 4. Slet produktet fra Array ved at bruge splice(). 
+ToDo: 5. Fjern <li> fra <ul> ved at bruge removeChild() og parentNode;
+*/
+
+let ulTag = document.getElementById("list-container");
 let btn = document.querySelector("button");
-let localPropductList = [];
+let localPropductList = ["Mælk", "Brød", "Vand"];
 
-btn.addEventListener("click", () => {
-  if (document.getElementById("product").value != "") {
-    saveEntry(document.getElementById("product").value);
+btn.addEventListener("click", (event) => {
+  event.preventDefault();
 
-    document.getElementById("product").value = "";
+  let inputData = document.getElementById("product");
+
+  if (inputData.value != "") {
+    localPropductList.push(inputData.value);
+    saveEntry(inputData.value);
+    inputData.value = "";
   } else {
     alert("Huskl at skrive produktnavn!");
   }
 });
 
 function saveEntry(productName) {
-  let ulTag = document.getElementById("list-container");
-
   let liTag = document.createElement("li");
   let pTag = document.createElement("p");
   let iTag = document.createElement("i");
@@ -37,8 +56,11 @@ function saveEntry(productName) {
   liTag.appendChild(iTag);
 
   ulTag.appendChild(liTag);
-
-  localPropductList.push(productName);
-
-  console.log(localPropductList);
 }
+
+function readLocalStorage(productList) {
+  for (let index = 0; index < localPropductList.length; index++) {
+    saveEntry(productList[index]);
+  }
+}
+readLocalStorage(localPropductList);
