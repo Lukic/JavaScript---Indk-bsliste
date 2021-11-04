@@ -52,6 +52,10 @@ function saveEntry(productName) {
   iTag.classList.add("fas");
   iTag.classList.add("fa-trash-alt");
 
+  /*
+  ToDo : CLick event skal være på iTag variablen.
+  */
+
   liTag.appendChild(pTag);
   liTag.appendChild(iTag);
 
